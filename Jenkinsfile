@@ -12,7 +12,7 @@ pipeline {
         stage('checkout') {
             steps {
                 
-                git 'https://github.com/siji-sathyan/ang-project.git'
+                git 'https://github.com/siji-sathyan/angapp1.git'
                 
             }
         }
