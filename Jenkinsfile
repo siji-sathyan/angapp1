@@ -3,7 +3,7 @@ pipeline {
     
     tools {
     nodejs 'NodeJS'
-     docker 'Docker'
+     
     } 
     environment {
         CI = 'true'
