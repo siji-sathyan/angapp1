@@ -45,14 +45,11 @@ pipeline {
     }
       stage('docker-login'){
         steps{
+          script{
         withCredentials([string(credentialsId: 'DOCKER_HUB' , variable: 'PASSWORD')]){
           sh 'docker login -u sijisdocker -p $PASSWORD'
         }
       }
-      }
-      stage('push image to docker hub'){
-        steps{
-        sh 'docker push sijisdocker/angapp1:angapp1'
       }
       }
 }
