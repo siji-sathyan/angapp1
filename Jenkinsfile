@@ -30,6 +30,15 @@ pipeline {
             
                 
             }
+         }
+      stage('docker-build') {
+            steps {
+                
+              sh 'docker version'
+              sh 'docker build -t angapp1 .'
+              sh 'docker image list'
+                
+            }
         }
     }
 }
