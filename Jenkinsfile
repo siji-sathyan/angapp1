@@ -37,6 +37,7 @@ pipeline {
               script{
                 docker.withTool('docker'){
                   sh 'docker version'
+                }
             }
         }
     }
