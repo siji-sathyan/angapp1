@@ -51,7 +51,7 @@ pipeline {
       stage('push image to docker hub'){
         sh 'docker push sijisdocker/angapp1:angapp1'
       }
-    }
+    
 }
 }
 
