@@ -37,6 +37,9 @@ pipeline {
               script{
                 docker.withTool('docker'){
                   sh 'docker version'
+                  sh 'docker buid -t angapp1 .'
+                  sh 'docker image list'
+                  sh 'docker tag angapp1 sijisdocker/angapp1:angapp1'
                 }
             }
         }
