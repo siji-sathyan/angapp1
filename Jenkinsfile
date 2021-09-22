@@ -3,6 +3,7 @@ pipeline {
     
     tools {
     nodejs 'NodeJS'
+      dockerTool 'docker'
      
     } 
     environment {
@@ -45,10 +46,10 @@ pipeline {
     }
       stage('docker-login'){
         steps{
-          script{
+          
             withCredentials([string(credentialsId: 'DOCKER_HUB', variable: 'PASSWORD')]) {
               sh "docker login -u sijisdocker -p ${PASSWORD}"
-      }
+     
         
       }
       }
