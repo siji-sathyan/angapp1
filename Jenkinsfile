@@ -54,20 +54,7 @@ pipeline {
       }
       }
       }
-      stage('push image to docker hub'){
-        steps{
-        sh 'docker push sijisdocker/angapp1:v1'
-      }
-      }
-       stage('Run on server'){
-        steps{
-          
-          sshagent(['SSH-ID1']) {
-            sh "ssh -o StrictHostKeyChecking=no ec2-user@34.201.17.224 ${dockerRun}"
-      }
-
-      }
-      }
+      
 }
 }
 
