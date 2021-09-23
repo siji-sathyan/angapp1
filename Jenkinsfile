@@ -38,8 +38,8 @@ pipeline {
               script{
                 docker.withTool('docker'){
                   sh 'docker version'
-                  sh 'docker build -t angapp1 .'
-                  sh 'docker tag angapp1 sijisdocker/angapp1:angapp1'
+                  sh 'docker build -t angapp1:v1 .'
+          
                 }
             }
         }
@@ -56,7 +56,16 @@ pipeline {
       }
       stage('push image to docker hub'){
         steps{
-        sh 'docker push sijisdocker/angapp1:angapp1'
+        sh 'docker push sijisdocker/angapp1:v1'
+      }
+      }
+       stage('Run on server'){
+        steps{
+          def dockerRun='docker run -p 8090:8080 -d --name angularapp sijisdocker/angapp1:v1'
+          sshagent(['SSH-ID1']) {
+            sh "ssh -o StrictHostKeyChecking=no ec2-user@34.201.17.224 ${dockerRun}"
+      }
+
       }
       }
 }
