@@ -1,6 +1,5 @@
 def dockerRun='docker run -p 8090:8080 -d --name angularapp sijisdocker/angapp1:v1'
 pipeline {
-    agent {label 'agent' }
     
    
     environment {
