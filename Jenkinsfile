@@ -61,7 +61,7 @@ pipeline {
       }
        stage('Run on server'){
         steps{
-          def dockerRun='docker run -p 8090:8080 -d --name angularapp sijisdocker/angapp1:v1'
+          dockerRun='docker run -p 8090:8080 -d --name angularapp sijisdocker/angapp1:v1'
           sshagent(['SSH-ID1']) {
             sh "ssh -o StrictHostKeyChecking=no ec2-user@34.201.17.224 ${dockerRun}"
       }
