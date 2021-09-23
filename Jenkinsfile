@@ -40,7 +40,7 @@ pipeline {
                 docker.withTool('docker'){
                   sh 'docker version'
                   sh 'docker build -t angapp1:v1 .'
-          
+                  sh 'docker tag angapp1 sijisdocker/angapp1:v1'
                 }
             }
         }
