@@ -2,11 +2,7 @@ def dockerRun='docker run -p 8090:8080 -d --name angularapp sijisdocker/angapp1:
 pipeline {
     agent {label 'agent' }
     
-    tools {
-    nodejs 'NodeJS'
-      dockerTool 'docker'
-     
-    } 
+   
     environment {
         CI = 'true'
     }
