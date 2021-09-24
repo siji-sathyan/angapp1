@@ -63,7 +63,7 @@ pipeline {
         steps{
           
           sshagent(['SSH-ID1']) {
-            sh "ssh -o StrictHostKeyChecking=no ec2-user@34.201.17.224 ${dockerRun}"
+            sh "ssh -o StrictHostKeyChecking=no ec2-user@44.193.16.208 ${dockerRun}"
       }
 
       }
