@@ -29,8 +29,7 @@ pipeline {
             steps {
                 
               sh 'npm run build'
-         
-                
+          
             }
          }
       stage('docker-build') {
