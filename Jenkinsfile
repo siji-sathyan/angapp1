@@ -1,4 +1,4 @@
-def dockerRun='docker run -p 80:80 -d --name angular sijisdocker/angapp1:v1'
+def dockerRun='docker run -p 80:80 -d --name angularapp1 sijisdocker/angapp1:v1'
 pipeline {
     agent {label 'agent' }
    tools {
@@ -32,6 +32,20 @@ pipeline {
           
             }
          }
+      stage('build package') {
+            steps {
+                
+              sh 'zip angapp1.zip dist/angapp1'
+          
+            }
+         }
+      stage('Artifact') {
+            steps {
+                fingerprint 'angapp1.zip'
+                archiveArtifacts 'angapp1.zip'
+          
+            }
+         }
       stage('docker-build') {
             steps {
               script{
@@ -62,7 +76,7 @@ pipeline {
         steps{
           
           sshagent(['SSH-ID']) {
-            sh "ssh -o StrictHostKeyChecking=no ec2-user@3.237.81.112 ${dockerRun}"
+            sh "ssh -o StrictHostKeyChecking=no ec2-user@18.234.248.132 ${dockerRun}"
       }
 
       }
