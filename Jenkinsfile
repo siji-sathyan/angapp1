@@ -1,49 +1,39 @@
-def dockerRun='docker run -p 80:80 -d --name angularapp1 sijisdocker/angapp1:v1'
+def dockerRun='docker run -p 80:80 -d --name assessment sijisdocker/angular:v1'
 pipeline {
     agent {label 'agent' }
    tools {
     nodejs 'NodeJS'
       dockerTool 'docker'
-     
     } 
     environment {
         CI = 'true'
     }
-
+  
     stages {
         stage('checkout') {
-            steps {
-                
-                git 'https://github.com/siji-sathyan/angapp1.git'
-                
+            steps { 
+                git 'https://github.com/siji-sathyan/angapp1.git' 
             }
         }
          stage('npm install') {
-            steps {
-                
-               sh 'npm install'
-                
+            steps { 
+               sh 'npm install' 
             }
         }
          stage('build') {
-            steps {
-                
+            steps {   
               sh 'npm run build'
-          
             }
          }
       stage('build package') {
-            steps {
-                
+            steps { 
               sh 'zip angapp1.zip dist/angapp1'
-          
             }
          }
       stage('Artifact') {
             steps {
                 fingerprint 'angapp1.zip'
                 archiveArtifacts 'angapp1.zip'
-          
             }
          }
       stage('docker-build') {
@@ -51,8 +41,8 @@ pipeline {
               script{
                 docker.withTool('docker'){
                   sh 'docker version'
-                  sh 'docker build -t angapp1:v1 .'
-                  sh 'docker tag angapp1:v1 sijisdocker/angapp1:v1'
+                  sh 'docker build -t angular:v1 .'
+                  sh 'docker tag angular:v1 sijisdocker/angular:v1'
                 }
             }
         }
@@ -61,9 +51,7 @@ pipeline {
         steps{
           
             withCredentials([string(credentialsId: 'DOCKER_HUB', variable: 'PASSWORD')]) {
-              sh "docker login -u sijisdocker -p ${PASSWORD}"
-     
-        
+              sh "docker login -u sijisdocker -p ${PASSWORD}"    
       }
       }
       }
@@ -73,12 +61,10 @@ pipeline {
       }
       }
        stage('Run on server'){
-        steps{
-          
+        steps{          
           sshagent(['SSH-ID']) {
-            sh "ssh -o StrictHostKeyChecking=no ec2-user@18.234.248.132 ${dockerRun}"
+            sh "ssh -o StrictHostKeyChecking=no ec2-user@18.215.16.249 ${dockerRun}"
       }
-
       }
       }
       
