@@ -46,7 +46,7 @@ pipeline {
       }
       stage('push image to docker hub'){
         steps{
-        sh 'docker push sijisdocker/angapp1:v1'
+        sh 'docker push sijisdocker/angular:v1'
       }
       }
        stage('Run on server'){
