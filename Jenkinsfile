@@ -25,17 +25,6 @@ pipeline {
               sh 'npm run build'
             }
          }
-      stage('build package') {
-            steps { 
-              sh 'zip angapp1.zip dist/angapp1'
-            }
-         }
-      stage('Artifact') {
-            steps {
-                fingerprint 'angapp1.zip'
-                archiveArtifacts 'angapp1.zip'
-            }
-         }
       stage('docker-build') {
             steps {
               script{
